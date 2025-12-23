@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battlefield Bar & Grill - Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #3bb4e5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .menu-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .ion-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+        }
+
+        .ion-logo::before,
+        .ion-logo::after {
+            content: '—';
+            margin: 0 10px;
+        }
+
+        .battlefield-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .bar-grill-banner {
+            display: inline-block;
+            background: #f4c430;
+            padding: 5px 30px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+        }
+
+        /* Main Content Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .left-column,
+        .middle-column,
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Menu Sections */
+        .menu-section {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 3px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .item-info {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+        }
+
+        .item-description {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .item-note {
+            font-size: 0.75rem;
+            color: #444;
+            font-style: italic;
+        }
+
+        .item-price {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            white-space: nowrap;
+        }
+
+        .combo-note {
+            font-size: 0.75rem;
+            color: #333;
+            font-style: italic;
+            text-align: center;
+            margin: 10px 0 0 0;
+            font-weight: 600;
+        }
+
+        /* Specials Box */
+        .specials-box {
+            background: #ffffff;
+            border: 3px solid #1a1a1a;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .specials-box p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #1a1a1a;
+        }
+
+        /* Baddpizza Logo */
+        .pizza-promo {
+            background: #ffffff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .pizza-promo .proudly {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .pizza-promo .baddpizza {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .pizza-promo .baddpizza .badd {
+            color: #e63946;
+        }
+
+        .pizza-promo .baddpizza .pizza {
+            color: #1a1a1a;
+        }
+
+        .disclaimer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer-banner {
+            display: inline-block;
+            background: #2a8fb8;
+            padding: 8px 40px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        /* Loading/Error States */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            grid-column: 1 / -1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .battlefield-title {
+                font-size: 2.5rem;
+            }
+
+            .middle-column {
+                order: 3;
+            }
+
+            .right-column {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-wrapper">
+        <div class="header">
+            <div class="ion-logo">ION</div>
+            <h1 class="battlefield-title">BATTLEFIELD</h1>
+            <div class="bar-grill-banner">BAR & GRILL</div>
+        </div>
+
+        <div class="disclaimer">
+            Consuming raw or undercooked meat, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness.
+        </div>
+
+        <div class="menu-grid" id="menu-content">
+            <div class="loading">Loading menu...</div>
+        </div>
+
+    </div>
+
+    <script>
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDQ47f4zQUgklCu25c_00_EkWELbwpfAURgMEhhRPneYzlLFmwqsiVz85ZvfotHI7HWyJbpACRnQVl/pub?gid=862495214&single=true&output=csv';
+
+        // Define which categories go in which column
+        const leftColumnCategories = ['Breakfast Served All Day', 'Lunch | Dinner'];
+        const middleColumnCategories = ['Sides', 'World Famous Spam Musubi'];
+        const rightColumnCategories = ['Beer | Wine | Cocktails', 'Non-Alcoholic Drinks'];
+
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const headers = parseCSVLine(lines[0]);
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim()) {
+                    const values = parseCSVLine(lines[i]);
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header.trim().toLowerCase().replace(/\s+/g, '_')] = values[index] ? values[index].trim() : '';
+                    });
+                    data.push(row);
+                }
+            }
+            return data;
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+        function groupByCategory(items) {
+            const groups = {};
+            items.forEach(item => {
+                const category = item.category || 'Other';
+                if (!groups[category]) {
+                    groups[category] = [];
+                }
+                groups[category].push(item);
+            });
+            return groups;
+        }
+
+        function renderSection(category, items) {
+            let html = `<div class="menu-section">`;
+            html += `<h2 class="section-title">${category.toUpperCase()}</h2>`;
+            
+            let comboNote = '';
+            
+            items.forEach((item) => {
+                if (!item.name) return;
+                
+                // Check for section note (combo note)
+                if (item.section_note) {
+                    comboNote = item.section_note;
+                }
+                
+                const description = item.description ? `<div class="item-description">${item.description}</div>` : '';
+                const itemNote = item.item_note ? `<div class="item-note">${item.item_note}</div>` : '';
+                const price = item.price ? `${item.price}` : '';
+                
+                // Format price - handle dual prices like "6.49 | 9.99"
+                let priceDisplay = '';
+                if (price.includes('|')) {
+                    priceDisplay = price;
+                } else if (price) {
+                    priceDisplay = parseFloat(price).toFixed(2);
+                }
+                
+                html += `
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            ${description}
+                            ${itemNote}
+                        </div>
+                        <div class="item-price">${priceDisplay}</div>
+                    </div>
+                `;
+            });
+            
+            // Add combo note at the end if exists
+            if (comboNote) {
+                html += `<div class="combo-note">${comboNote}</div>`;
+            }
+            
+            html += `</div>`;
+            return html;
+        }
+
+        function renderMenu(items) {
+            const groups = groupByCategory(items);
+            const menuContent = document.getElementById('menu-content');
+            
+            // Left Column
+            let leftHtml = `<div class="left-column">`;
+            leftColumnCategories.forEach(cat => {
+                if (groups[cat]) {
+                    leftHtml += renderSection(cat, groups[cat]);
+                }
+            });
+            leftHtml += `</div>`;
+            
+            // Middle Column
+            let middleHtml = `<div class="middle-column">`;
+            middleColumnCategories.forEach(cat => {
+                if (groups[cat]) {
+                    middleHtml += renderSection(cat, groups[cat]);
+                }
+            });
+            // Add specials box
+            middleHtml += `
+                <div class="specials-box">
+                    <p>ASK ABOUT OUR<br>SPECIALS BY<br>JENN'S ONO CAFE</p>
+                </div>
+            `;
+            // Add baddpizza promo
+            middleHtml += `
+                <div class="pizza-promo">
+                    <div class="proudly">PROUDLY SERVING</div>
+                    <div class="baddpizza"><span class="badd">badd</span><span class="pizza">pizza</span></div>
+                </div>
+            `;
+            middleHtml += `</div>`;
+            
+            // Right Column
+            let rightHtml = `<div class="right-column">`;
+            rightColumnCategories.forEach(cat => {
+                if (groups[cat]) {
+                    rightHtml += renderSection(cat, groups[cat]);
+                }
+            });
+            rightHtml += `</div>`;
+            
+            menuContent.innerHTML = leftHtml + middleHtml + rightHtml;
+        }
+
+        async function loadMenu() {
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                if (!response.ok) throw new Error('Failed to fetch');
+                const csvText = await response.text();
+                const items = parseCSV(csvText);
+                renderMenu(items);
+            } catch (error) {
+                document.getElementById('menu-content').innerHTML = `
+                    <div class="loading">Unable to load menu. Please refresh the page.</div>
+                `;
+                console.error('Error:', error);
+            }
+        }
+
+        loadMenu();
+    </script>
+</body>
+</html>
