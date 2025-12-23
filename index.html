@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battlefield Bar and Grill - Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2c5530;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c5530;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 5px;
+        }
+
+        .header .tagline {
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c5530;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px dotted #ccc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-note {
+            background: #f0f7f1;
+            border-left: 4px solid #2c5530;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-details {
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .item-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .item-name .gf-badge {
+            background: #4a7c4e;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .item-note {
+            font-size: 0.85rem;
+            color: #2c5530;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .item-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2c5530;
+            white-space: nowrap;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #c00;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #2c5530;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .menu-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="header">
+            <h1>Battlefield Bar and Grill</h1>
+            <p class="tagline">Good Food, Good Times</p>
+        </div>
+
+        <div id="menu-content">
+            <div class="loading">Loading menu...</div>
+        </div>
+
+        <div class="footer">
+            <p>Prices subject to change</p>
+        </div>
+    </div>
+
+    <script>
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDQ47f4zQUgklCu25c_00_EkWELbwpfAURgMEhhRPneYzlLFmwqsiVz85ZvfotHI7HWyJbpACRnQVl/pub?gid=862495214&single=true&output=csv';
+
+        const categoryOrder = [
+            'Breakfast Served All Day',
+            'Lunch | Dinner',
+            'Sides',
+            'World Famous Spam Musubi',
+            'Beer | Wine | Cocktails',
+            'Non-Alcoholic Drinks'
+        ];
+
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const headers = parseCSVLine(lines[0]);
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim()) {
+                    const values = parseCSVLine(lines[i]);
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header.trim().toLowerCase().replace(/\s+/g, '_')] = values[index] ? values[index].trim() : '';
+                    });
+                    data.push(row);
+                }
+            }
+            return data;
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+        function groupByCategory(items) {
+            const groups = {};
+            items.forEach(item => {
+                const category = item.category || 'Other';
+                if (!groups[category]) {
+                    groups[category] = [];
+                }
+                groups[category].push(item);
+            });
+            return groups;
+        }
+
+        function renderMenu(items) {
+            const groups = groupByCategory(items);
+            const menuContent = document.getElementById('menu-content');
+            
+            const sortedCategories = Object.keys(groups).sort((a, b) => {
+                const indexA = categoryOrder.indexOf(a);
+                const indexB = categoryOrder.indexOf(b);
+                if (indexA === -1 && indexB === -1) return 0;
+                if (indexA === -1) return 1;
+                if (indexB === -1) return -1;
+                return indexA - indexB;
+            });
+
+            let html = '';
+            
+            sortedCategories.forEach(category => {
+                html += `<div class="menu-section">`;
+                html += `<h2 class="section-title">${category}</h2>`;
+                
+                const categoryItems = groups[category];
+                const sectionNote = categoryItems[0]?.section_note;
+                if (sectionNote) {
+                    html += `<div class="section-note">${sectionNote}</div>`;
+                }
+                
+                categoryItems.forEach(item => {
+                    if (!item.name) return;
+                    
+                    const isGF = item.gluten_free && item.gluten_free.toLowerCase() === 'yes';
+                    const gfBadge = isGF ? '<span class="gf-badge">GF</span>' : '';
+                    const description = item.description ? `<div class="item-description">${item.description}</div>` : '';
+                    const itemNote = item.item_note ? `<div class="item-note">${item.item_note}</div>` : '';
+                    const price = item.price ? `$${parseFloat(item.price).toFixed(2)}` : '';
+                    
+                    html += `
+                        <div class="menu-item">
+                            <div class="item-details">
+                                <div class="item-name">${item.name}${gfBadge}</div>
+                                ${description}
+                                ${itemNote}
+                            </div>
+                            <div class="item-price">${price}</div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            });
+            
+            menuContent.innerHTML = html;
+        }
+
+        async function loadMenu() {
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                if (!response.ok) throw new Error('Failed to fetch');
+                const csvText = await response.text();
+                const items = parseCSV(csvText);
+                renderMenu(items);
+            } catch (error) {
+                document.getElementById('menu-content').innerHTML = `
+                    <div class="error">Unable to load menu. Please refresh the page.</div>
+                `;
+                console.error('Error:', error);
+            }
+        }
+
+        loadMenu();
+    </script>
+</body>
+</html>
