@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battlefield Bar and Grill - Beer, Wine & Cocktails</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1209 0%, #2d2418 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid #d4a84b;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #d4a84b;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            color: #d4a84b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: #ffffff;
+            font-style: italic;
+            letter-spacing: 3px;
+        }
+
+        .age-notice {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(212, 168, 75, 0.2);
+            border: 1px solid #d4a84b;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #d4a84b;
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #d4a84b;
+            border-bottom: 1px solid rgba(212, 168, 75, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .draft-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #aaaaaa;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 10px 0;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .item-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 2px;
+            color: #ffffff;
+        }
+
+        .item-style {
+            font-size: 0.8rem;
+            color: #c9a227;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+
+        .item-description {
+            font-size: 0.85rem;
+            color: #aaaaaa;
+            font-style: italic;
+        }
+
+        .item-abv {
+            font-size: 0.9rem;
+            color: #88b04b;
+            margin-right: 20px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .item-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #d4a84b;
+            white-space: nowrap;
+            text-align: right;
+            min-width: 100px;
+        }
+
+        .section-note {
+            background: rgba(212, 168, 75, 0.15);
+            border: 1px solid rgba(212, 168, 75, 0.3);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        .draft-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 168, 75, 0.5);
+            font-size: 0.8rem;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .draft-header span:first-child {
+            flex: 1;
+        }
+
+        .draft-header .abv-header {
+            min-width: 50px;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .draft-header .price-header {
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.3rem;
+            color: #d4a84b;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 168, 75, 0.3);
+            font-size: 0.8rem;
+            color: #888888;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .menu-container {
+                padding: 20px;
+            }
+
+            .item-name {
+                font-size: 1rem;
+            }
+
+            .item-price {
+                font-size: 1rem;
+                min-width: 80px;
+            }
+
+            .item-abv {
+                min-width: 40px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="header">
+            <h1>Battlefield Bar and Grill</h1>
+            <div class="subtitle">Beer, Wine & Cocktails</div>
+        </div>
+
+        <div class="age-notice">
+            🍺 Must be 21+ to purchase alcohol • Please drink responsibly 🍷
+        </div>
+
+        <div id="menu-content">
+            <div class="loading">Loading drink menu...</div>
+        </div>
+
+        <div class="footer">
+            Prices subject to change • Ask about our daily specials
+        </div>
+    </div>
+
+    <script>
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTvFVatJxDHjgh-3BVqhQf2vvywTHuNNXj-OkKh6FxJ9p6SRRL1E623kylMri2sKYd5OtKxH5GgZQOE/pub?output=csv';
+
+        const categoryConfig = {
+            'Draft': { order: 1, showAbvHeader: true, note: 'Rotating taps - Ask what\'s on!' },
+            'Bottles & Cans': { order: 2, showAbvHeader: true },
+            'Canned Cocktails': { order: 3 },
+            'Wine': { order: 4 },
+            'Specials': { order: 5 }
+        };
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const headers = parseCSVLine(lines[0]);
+            const items = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim()) {
+                    const values = parseCSVLine(lines[i]);
+                    const item = {};
+                    headers.forEach((header, index) => {
+                        item[header.trim().toLowerCase().replace(/_/g, '')] = values[index] ? values[index].trim() : '';
+                    });
+                    items.push(item);
+                }
+            }
+            return items;
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
+        function groupByCategory(items) {
+            const groups = {};
+            items.forEach(item => {
+                const category = item.category || 'Other';
+                if (!groups[category]) {
+                    groups[category] = [];
+                }
+                groups[category].push(item);
+            });
+            return groups;
+        }
+
+        function renderMenu(items) {
+            const menuContent = document.getElementById('menu-content');
+            const groups = groupByCategory(items);
+            
+            const sortedCategories = Object.keys(groups).sort((a, b) => {
+                const orderA = categoryConfig[a]?.order || 99;
+                const orderB = categoryConfig[b]?.order || 99;
+                return orderA - orderB;
+            });
+
+            let html = '';
+            
+            sortedCategories.forEach(category => {
+                const config = categoryConfig[category] || {};
+                const categoryItems = groups[category];
+                const showAbv = config.showAbvHeader && categoryItems.some(item => item.abv);
+                
+                html += `<div class="menu-section">`;
+                html += `<h2 class="section-title">${category}</h2>`;
+                
+                if (config.note) {
+                    html += `<div class="draft-note">${config.note}</div>`;
+                }
+                
+                if (showAbv) {
+                    html += `
+                        <div class="draft-header">
+                            <span>Beer</span>
+                            <span class="abv-header">ABV</span>
+                            <span class="price-header">Price</span>
+                        </div>
+                    `;
+                }
+                
+                categoryItems.forEach(item => {
+                    const description = item.description ? `<div class="item-description">${item.description}</div>` : '';
+                    const style = item.style ? `<div class="item-style">${item.style}</div>` : '';
+                    
+                    let priceDisplay = `$${parseFloat(item.price).toFixed(2)}`;
+                    if (item.price2 && !isNaN(parseFloat(item.price2))) {
+                        priceDisplay += ` / $${parseFloat(item.price2).toFixed(2)}`;
+                    }
+                    
+                    const abvDisplay = showAbv ? `<div class="item-abv">${item.abv || '-'}</div>` : '';
+                    
+                    html += `
+                        <div class="menu-item">
+                            <div class="item-info">
+                                <div class="item-name">${item.name}</div>
+                                ${style}
+                                ${description}
+                            </div>
+                            ${abvDisplay}
+                            <div class="item-price">${priceDisplay}</div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            });
+            
+            menuContent.innerHTML = html;
+        }
+
+        async function loadMenu() {
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error('Failed to fetch menu data');
+                
+                const csv = await response.text();
+                const items = parseCSV(csv);
+                renderMenu(items);
+            } catch (error) {
+                console.error('Error loading menu:', error);
+                document.getElementById('menu-content').innerHTML = `
+                    <div class="error">
+                        Unable to load menu. Please refresh the page.<br>
+                        <small>${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMenu);
+    </script>
+</body>
+</html>
