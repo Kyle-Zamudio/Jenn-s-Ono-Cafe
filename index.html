@@ -69,6 +69,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 15px;
+            align-items: stretch;
         }
 
         .left-column,
@@ -77,6 +78,13 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+        }
+
+        /* Make last item in each column stretch to fill */
+        .left-column > *:last-child,
+        .middle-column > *:last-child,
+        .right-column > *:last-child {
+            flex-grow: 1;
         }
 
         /* Menu Sections */
@@ -257,7 +265,7 @@
     </div>
 
     <script>
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDQ47f4zQUgklCu25c_00_EkWELbwpfAURgMEhhRPneYzlLFmwqsiVz85ZvfotHI7HWyJbpACRnQVl/pub?gid=183863868&single=true&output=csv';
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDQ47f4zQUgklCu25c_00_EkWELbwpfAURgMEhhRPneYzlLFmwqsiVz85ZvfotHI7HWyJbpACRnQVl/pub?gid=862495214&single=true&output=csv';
 
         // Define which categories go in which column
         const leftColumnCategories = ['Breakfast Served All Day', 'Lunch | Dinner'];
