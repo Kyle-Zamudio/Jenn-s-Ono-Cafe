@@ -20,7 +20,7 @@
         }
 
         .menu-wrapper {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -32,16 +32,26 @@
 
         .ion-logo {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #1a1a1a;
-            letter-spacing: 8px;
-            margin-bottom: 5px;
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+            position: relative;
         }
 
-        .ion-logo::before,
-        .ion-logo::after {
-            content: '—';
-            margin: 0 10px;
+        .ion-logo .ion-o {
+            position: relative;
+            display: inline-block;
+        }
+
+        .ion-logo .ion-o::after {
+            content: '✯';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.6em;
+            color: #1a1a1a;
         }
 
         .battlefield-title {
@@ -56,20 +66,23 @@
         .bar-grill-banner {
             display: inline-block;
             background: #f4c430;
-            padding: 5px 30px;
+            border: 2px solid #1a1a1a;
+            padding: 8px 30px;
             font-family: 'Oswald', sans-serif;
             font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 3px;
-            color: #1a1a1a;
+            color: #ffffff;
         }
 
         /* Main Content Grid */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
             align-items: stretch;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .left-column,
@@ -153,7 +166,7 @@
         /* Specials Box */
         .specials-box {
             background: #ffffff;
-            border: 3px solid #1a1a1a;
+            border: 1px solid #1a1a1a;
             padding: 20px;
             text-align: center;
         }
@@ -204,17 +217,20 @@
 
         /* Footer */
         .footer {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
         }
 
         .footer-banner {
             display: inline-block;
-            background: #2a8fb8;
+            background: #f4c430;
+            border: 2px solid #1a1a1a;
             padding: 8px 40px;
+            font-family: 'Oswald', sans-serif;
             font-size: 0.75rem;
+            font-weight: 600;
             letter-spacing: 1px;
-            color: #ffffff;
+            color: #1a1a1a;
         }
 
         /* Loading/Error States */
@@ -249,7 +265,7 @@
 <body>
     <div class="menu-wrapper">
         <div class="header">
-            <div class="ion-logo">ION</div>
+            <div class="ion-logo">I<span class="ion-o">O</span>N</div>
             <h1 class="battlefield-title">BATTLEFIELD</h1>
             <div class="bar-grill-banner">BAR & GRILL</div>
         </div>
@@ -262,10 +278,13 @@
             <div class="loading">Loading menu...</div>
         </div>
 
+        <div class="footer">
+            <div class="footer-banner">MENU UPDATED ON DECEMBER 18, 2025</div>
+        </div>
     </div>
 
     <script>
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDQ47f4zQUgklCu25c_00_EkWELbwpfAURgMEhhRPneYzlLFmwqsiVz85ZvfotHI7HWyJbpACRnQVl/pub?gid=183863868&single=true&output=csv';
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDQ47f4zQUgklCu25c_00_EkWELbwpfAURgMEhhRPneYzlLFmwqsiVz85ZvfotHI7HWyJbpACRnQVl/pub?gid=862495214&single=true&output=csv';
 
         // Define which categories go in which column
         const leftColumnCategories = ['Breakfast Served All Day', 'Lunch | Dinner'];
