@@ -87,12 +87,20 @@
             width: 100%;
             margin: 0 auto;
             min-width: 600px;
-            background: #ffffff;
         }
 
         .left-column,
-        .middle-column,
         .right-column {
+            background: #3bb4e5;
+            padding: clamp(15px, 2vw, 25px);
+            border-radius: clamp(2px, 0.3vw, 5px);
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            min-width: 0;
+        }
+        
+        .middle-column {
             background: #ffffff;
             padding: clamp(15px, 2vw, 25px);
             border-radius: clamp(2px, 0.3vw, 5px);
@@ -106,11 +114,23 @@
 
         /* Menu Sections */
         .menu-section {
+            background: #ffffff;
+            padding: clamp(15px, 2vw, 25px);
+            border-radius: clamp(2px, 0.3vw, 5px);
+            margin-bottom: clamp(15px, 2vw, 25px);
+        }
+        
+        .menu-section:last-of-type {
+            margin-bottom: 0;
+        }
+        
+        .middle-column .menu-section {
+            background: transparent;
             padding: 0;
             margin-bottom: clamp(15px, 2vh, 25px);
         }
         
-        .menu-section:last-of-type {
+        .middle-column .menu-section:last-of-type {
             margin-bottom: 0;
         }
 
