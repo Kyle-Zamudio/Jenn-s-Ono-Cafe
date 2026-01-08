@@ -14,10 +14,14 @@
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background: #ffffff;
+            background: #ffffff !important;
             min-height: 100vh;
             padding: clamp(10px, 1.5vw, 20px);
             overflow-x: auto;
+        }
+        
+        html {
+            background: #ffffff !important;
         }
 
         .menu-wrapper {
@@ -36,9 +40,25 @@
             font-family: 'Oswald', sans-serif;
             font-size: clamp(1.2rem, 2.5vw, 2.5rem);
             color: #1a1a1a;
-            letter-spacing: clamp(4px, 0.8vw, 8px);
+            letter-spacing: clamp(2px, 0.4vw, 4px);
             margin-bottom: clamp(5px, 1vh, 12px);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(10px, 2vw, 20px);
+        }
+
+        .ion-logo .line {
+            width: clamp(40px, 8vw, 100px);
+            height: 2px;
+            background: #1a1a1a;
+        }
+
+        .ion-logo .ion-text {
+            display: flex;
+            align-items: center;
+            letter-spacing: clamp(6px, 1.2vw, 12px);
         }
 
         .ion-logo .ion-o {
@@ -46,14 +66,13 @@
             display: inline-block;
         }
 
-        .ion-logo .ion-o::after {
-            content: '✯';
+        .ion-logo .ion-o .compass {
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            font-size: 0.6em;
-            color: #1a1a1a;
+            font-size: 0.5em;
+            color: #2a5a7a;
         }
 
         .battlefield-title {
@@ -67,14 +86,14 @@
 
         .bar-grill-banner {
             display: inline-block;
-            background: #f4c430;
+            background: #1a1a1a;
             border: none;
             padding: clamp(6px, 1.2vw, 12px) clamp(20px, 3vw, 40px);
             font-family: 'Oswald', sans-serif;
             font-size: clamp(0.9rem, 1.8vw, 1.8rem);
             font-weight: 600;
             letter-spacing: clamp(2px, 0.4vw, 4px);
-            color: #1a1a1a;
+            color: #3bb4e5;
         }
 
         /* Main Content Grid */
@@ -91,7 +110,7 @@
 
         .left-column,
         .right-column {
-            background: #3bb4e5;
+            background: #3bb4e5 !important;
             padding: clamp(15px, 2vw, 25px);
             border-radius: clamp(2px, 0.3vw, 5px);
             display: flex;
@@ -101,7 +120,7 @@
         }
         
         .middle-column {
-            background: #ffffff;
+            background: #ffffff !important;
             padding: clamp(15px, 2vw, 25px);
             border-radius: clamp(2px, 0.3vw, 5px);
             border: 1px solid #e0e0e0;
@@ -117,6 +136,12 @@
             background: #ffffff;
             padding: clamp(15px, 2vw, 25px);
             border-radius: clamp(2px, 0.3vw, 5px);
+        }
+        
+        .left-column .menu-section,
+        .right-column .menu-section {
+            background: transparent;
+            padding: 0;
         }
         
         .middle-column .menu-section {
@@ -287,7 +312,11 @@
 <body>
     <div class="menu-wrapper">
         <div class="header">
-            <div class="ion-logo">I<span class="ion-o">O</span>N</div>
+            <div class="ion-logo">
+                <span class="line"></span>
+                <span class="ion-text">I<span class="ion-o">O<span class="compass">✧</span></span>N</span>
+                <span class="line"></span>
+            </div>
             <h1 class="battlefield-title">BATTLEFIELD</h1>
             <div class="bar-grill-banner">BAR & GRILL</div>
         </div>
