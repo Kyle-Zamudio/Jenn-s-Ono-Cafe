@@ -16,7 +16,7 @@
             font-family: 'Open Sans', sans-serif;
             background: #3bb4e5;
             min-height: 100vh;
-            padding: clamp(10px, 2vw, 30px);
+            padding: clamp(10px, 1.5vw, 20px);
             overflow-x: auto;
         }
 
@@ -58,7 +58,7 @@
 
         .battlefield-title {
             font-family: 'Oswald', sans-serif;
-            font-size: clamp(2rem, 5vw, 5rem);
+            font-size: clamp(2rem, 4vw, 4rem);
             font-weight: 700;
             color: #1a1a1a;
             letter-spacing: clamp(2px, 0.5vw, 6px);
@@ -81,9 +81,9 @@
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: clamp(10px, 2vw, 25px);
+            gap: clamp(15px, 2.5vw, 30px);
             align-items: stretch;
-            max-width: 1000px;
+            max-width: 95vw;
             width: 100%;
             margin: 0 auto;
             min-width: 600px;
@@ -92,34 +92,38 @@
         .left-column,
         .middle-column,
         .right-column {
+            background: #ffffff;
+            padding: clamp(15px, 2vw, 25px);
+            border-radius: clamp(2px, 0.3vw, 5px);
             display: flex;
             flex-direction: column;
-            gap: clamp(10px, 1.5vw, 20px);
+            gap: 0;
             min-width: 0;
-        }
-
-        /* Make last item in each column stretch to fill */
-        .left-column > *:last-child,
-        .middle-column > *:last-child,
-        .right-column > *:last-child {
-            flex-grow: 1;
         }
 
         /* Menu Sections */
         .menu-section {
-            background: #ffffff;
-            padding: clamp(15px, 2.5vw, 30px);
-            border-radius: clamp(2px, 0.3vw, 5px);
+            padding: 0;
+            margin-bottom: clamp(15px, 2vh, 25px);
+        }
+        
+        .menu-section:last-of-type {
+            margin-bottom: 0;
         }
 
         .section-title {
             font-family: 'Oswald', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.8rem);
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
             font-weight: 600;
             text-align: center;
-            margin-bottom: clamp(10px, 1.5vw, 20px);
+            margin-bottom: clamp(10px, 1.5vw, 18px);
+            margin-top: clamp(15px, 2vh, 25px);
             letter-spacing: clamp(1px, 0.3vw, 3px);
             color: #1a1a1a;
+        }
+        
+        .section-title:first-child {
+            margin-top: 0;
         }
 
         .menu-item {
@@ -136,25 +140,25 @@
 
         .item-name {
             font-weight: 600;
-            font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
             color: #1a1a1a;
         }
 
         .item-description {
-            font-size: clamp(0.7rem, 1.2vw, 1rem);
+            font-size: clamp(0.7rem, 1vw, 0.85rem);
             color: #666;
             font-style: italic;
         }
 
         .item-note {
-            font-size: clamp(0.65rem, 1vw, 0.9rem);
+            font-size: clamp(0.65rem, 0.9vw, 0.8rem);
             color: #444;
             font-style: italic;
         }
 
         .item-price {
             font-weight: 600;
-            font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
             color: #1a1a1a;
             white-space: nowrap;
         }
@@ -170,10 +174,11 @@
 
         /* Specials Box */
         .specials-box {
-            background: #ffffff;
+            background: transparent;
             border: clamp(1px, 0.15vw, 2px) solid #1a1a1a;
-            padding: clamp(15px, 2.5vw, 30px);
+            padding: clamp(15px, 2vw, 25px);
             text-align: center;
+            margin-top: clamp(15px, 2vh, 25px);
         }
 
         .specials-box p {
@@ -186,9 +191,10 @@
 
         /* Baddpizza Logo */
         .pizza-promo {
-            background: #ffffff;
+            background: transparent;
             padding: clamp(12px, 2vw, 20px);
             text-align: center;
+            margin-top: clamp(15px, 2vh, 25px);
         }
 
         .pizza-promo .proudly {
