@@ -68,13 +68,13 @@
         .bar-grill-banner {
             display: inline-block;
             background: #f4c430;
-            border: clamp(1px, 0.2vw, 3px) solid #1a1a1a;
+            border: none;
             padding: clamp(6px, 1.2vw, 12px) clamp(20px, 3vw, 40px);
             font-family: 'Oswald', sans-serif;
             font-size: clamp(0.9rem, 1.8vw, 1.8rem);
             font-weight: 600;
             letter-spacing: clamp(2px, 0.4vw, 4px);
-            color: #ffffff;
+            color: #1a1a1a;
         }
 
         /* Main Content Grid */
@@ -92,23 +92,17 @@
         .left-column,
         .middle-column,
         .right-column {
-            background: #ffffff;
-            padding: clamp(15px, 2vw, 25px);
-            border-radius: clamp(2px, 0.3vw, 5px);
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: clamp(15px, 2vw, 25px);
             min-width: 0;
         }
 
         /* Menu Sections */
         .menu-section {
-            padding: 0;
-            margin-bottom: clamp(15px, 2vh, 25px);
-        }
-        
-        .menu-section:last-of-type {
-            margin-bottom: 0;
+            background: #ffffff;
+            padding: clamp(15px, 2vw, 25px);
+            border-radius: clamp(2px, 0.3vw, 5px);
         }
 
         .section-title {
@@ -117,13 +111,8 @@
             font-weight: 600;
             text-align: center;
             margin-bottom: clamp(10px, 1.5vw, 18px);
-            margin-top: clamp(15px, 2vh, 25px);
             letter-spacing: clamp(1px, 0.3vw, 3px);
             color: #1a1a1a;
-        }
-        
-        .section-title:first-child {
-            margin-top: 0;
         }
 
         .menu-item {
@@ -174,11 +163,11 @@
 
         /* Specials Box */
         .specials-box {
-            background: transparent;
+            background: #ffffff;
             border: clamp(1px, 0.15vw, 2px) solid #1a1a1a;
             padding: clamp(15px, 2vw, 25px);
             text-align: center;
-            margin-top: clamp(15px, 2vh, 25px);
+            border-radius: clamp(2px, 0.3vw, 5px);
         }
 
         .specials-box p {
@@ -191,10 +180,10 @@
 
         /* Baddpizza Logo */
         .pizza-promo {
-            background: transparent;
+            background: #ffffff;
             padding: clamp(12px, 2vw, 20px);
             text-align: center;
-            margin-top: clamp(15px, 2vh, 25px);
+            border-radius: clamp(2px, 0.3vw, 5px);
         }
 
         .pizza-promo .proudly {
@@ -235,7 +224,7 @@
         .footer-banner {
             display: inline-block;
             background: #f4c430;
-            border: clamp(1px, 0.2vw, 3px) solid #1a1a1a;
+            border: none;
             padding: clamp(6px, 1.2vw, 12px) clamp(30px, 4vw, 50px);
             font-family: 'Oswald', sans-serif;
             font-size: clamp(0.65rem, 1.2vw, 0.95rem);
