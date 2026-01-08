@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background: #3bb4e5;
+            background: #ffffff;
             min-height: 100vh;
             padding: clamp(10px, 1.5vw, 20px);
             overflow-x: auto;
@@ -87,22 +87,17 @@
             width: 100%;
             margin: 0 auto;
             min-width: 600px;
+            background: #ffffff;
         }
 
-        .left-column {
-            background: transparent;
-            padding: clamp(15px, 2vw, 25px);
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            min-width: 0;
-        }
-        
+        .left-column,
         .middle-column,
         .right-column {
             background: #ffffff;
             padding: clamp(15px, 2vw, 25px);
             border-radius: clamp(2px, 0.3vw, 5px);
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             gap: 0;
@@ -111,18 +106,12 @@
 
         /* Menu Sections */
         .menu-section {
-            background: #ffffff;
-            padding: clamp(15px, 2vw, 25px);
-            border-radius: clamp(2px, 0.3vw, 5px);
-            margin-bottom: clamp(15px, 2vw, 25px);
+            padding: 0;
+            margin-bottom: clamp(15px, 2vh, 25px);
         }
         
         .menu-section:last-of-type {
             margin-bottom: 0;
-        }
-        
-        .left-column .menu-section {
-            margin-bottom: clamp(15px, 2vw, 25px);
         }
 
         .section-title {
