@@ -438,15 +438,23 @@
         async function loadMenu() {
             try {
                 const response = await fetch(SHEET_CSV_URL);
-                if (!response.ok) throw new Error('Failed to fetch');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const csvText = await response.text();
+                if (!csvText || csvText.trim().length === 0) {
+                    throw new Error('Empty response from server');
+                }
                 const items = parseCSV(csvText);
+                if (items.length === 0) {
+                    throw new Error('No menu items found');
+                }
                 renderMenu(items);
             } catch (error) {
                 document.getElementById('menu-content').innerHTML = `
-                    <div class="loading">Unable to load menu. Please refresh the page.</div>
+                    <div class="loading">Unable to load menu. Please refresh the page.<br><small>Error: ${error.message}</small></div>
                 `;
-                console.error('Error:', error);
+                console.error('Error loading menu:', error);
             }
         }
 
